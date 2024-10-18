@@ -2,6 +2,7 @@ package com.quizo.app.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,6 +38,9 @@ public class Player implements UserDetails {
 
 	private String phoneNumber;
 
+	@ManyToMany
+	private List<Question> questions;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(Role.PLAYER.name()));
@@ -65,10 +69,6 @@ public class Player implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return UserDetails.super.isEnabled();
-	}
-
-	public String getRegistrationDetail() {
-		return id.getRegistrationDetail();
 	}
 
 }
