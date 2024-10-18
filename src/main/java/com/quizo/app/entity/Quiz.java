@@ -37,4 +37,9 @@ public class Quiz {
 	@OneToMany(orphanRemoval = true)
 	private List<Question> questions;
 
+	private int questionsPerPlayer;
+
+	@Builder.Default
+	private boolean shuffleQuestions = false;
+
 }
